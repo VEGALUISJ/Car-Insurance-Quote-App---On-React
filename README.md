@@ -1,6 +1,6 @@
 # Getting Started with Create React App
 
-To deply a work enviroment 
+To deploy work enviroment 
 
 ### `npm start`
 
