@@ -3,6 +3,7 @@ import Header from "./components/Header";
 import Form from "./components/Form";
 import Overview from "./components/Overview";
 import Result from "./components/Result";
+import Spinner from "./components/Spinner";
 
 import styled from "@emotion/styled";
 
@@ -26,6 +27,8 @@ function App() {
     },
   });
 
+  const [loading, setLoading] = useState(false);
+
   //extract data using destructuring method, this avoid data.brand, etc.
   const { grandTotal, data } = overview;
 
@@ -34,9 +37,13 @@ function App() {
       <Header tittle="Car Insurance Quote App" />
 
       <FormContainer>
-        <Form setOverview={setOverview} />
-        <Overview data={data} />
-        <Result grandTotal={grandTotal} />
+        <Form setOverview={setOverview} setLoading={setLoading} />
+
+        {loading ? <Spinner /> : null}
+
+        {loading ? null : <Overview data={data} />}
+
+        {loading ? null : <Result grandTotal={grandTotal} />}
       </FormContainer>
     </Container>
   );

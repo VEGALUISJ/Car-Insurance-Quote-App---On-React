@@ -50,7 +50,7 @@ const Error = styled.div`
   border-radius: 5px;
 `;
 
-const Form = ({ setOverview }) => {
+const Form = ({ setOverview, setLoading }) => {
   const [data, setData] = useState({
     brand: "",
     year: "",
@@ -99,13 +99,19 @@ const Form = ({ setOverview }) => {
     //fullCover plan increase 50%
     const increasePlan = planCalculation(plan);
     result = parseFloat(result * increasePlan).toFixed(2);
-    console.log(result);
+
+    //showing spinner
+    setLoading(true);
 
     //grand total after calculation and sending this infor thru props.
-    setOverview({
-      grandTotal: result,
-      data,
-    });
+    setTimeout(() => {
+      //quiting spinner animation
+      setLoading(false);
+      setOverview({
+        grandTotal: result,
+        data,
+      });
+    }, 2000);
   };
 
   return (
